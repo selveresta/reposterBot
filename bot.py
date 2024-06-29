@@ -13,7 +13,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 logging.basicConfig(level=logging.INFO)
 
 API_TOKEN = ""
-GROUP_ID = -1002193296956
+GROUP_ID = -1001792317500
 MESSAGE_ID = 0
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
@@ -37,7 +37,7 @@ async def send_new_post(message: types.Message, bot: Bot):
         )
     )
 
-    photo = FSInputFile("IMG.jpg")
+    photo = FSInputFile("image.png")
 
     keyboard = keyboard_builder.as_markup()
 
@@ -46,15 +46,15 @@ async def send_new_post(message: types.Message, bot: Bot):
             GROUP_ID,
             photo=photo,
             caption="""
-🔥Official AIRDROP $COOKIE and TRUSTPAD platform has already begun!   
+🔥Official AIRDROP $СOFFEE and TRUSTPAD platform has already begun!   
   
-Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $COOKIE
+Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $СOFFEE
   
-You can take part in AIRDROP and collect your tokens $COOKIE worth up to 500$ on official TRUSTPAD site👇   
+You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
   
 Link to participate: https://trustpad-mcl.com/
   
-🏆 Only the fastest participants of $COOKIE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
+🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
             reply_markup=keyboard,
         )
         MESSAGE_ID = message.message_id
@@ -69,15 +69,15 @@ Link to participate: https://trustpad-mcl.com/
         GROUP_ID,
         photo=photo,
         caption="""
-🔥Official AIRDROP $COOKIE and TRUSTPAD platform has already begun!   
+🔥Official AIRDROP $СOFFEE and TRUSTPAD platform has already begun!   
   
-Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $COOKIE
+Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $СOFFEE
   
-You can take part in AIRDROP and collect your tokens $COOKIE worth up to 500$ on official TRUSTPAD site👇   
+You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
   
 Link to participate: https://trustpad-mcl.com/
   
-🏆 Only the fastest participants of $COOKIE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
+🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
         reply_markup=keyboard,
     )
 

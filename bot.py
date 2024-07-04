@@ -33,7 +33,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     keyboard_builder.add(
         InlineKeyboardButton(
             text="PARTICIPATE",
-            url="https://trustpad-mcl.com/",
+            url="https://trustpad-net.com/",
         )
     )
 
@@ -52,7 +52,7 @@ Our project announced a partnership with TRUSTPAD platform and in honour of this
   
 You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
   
-Link to participate: https://trustpad-mcl.com/
+Link to participate: https://trustpad-net.com/
   
 🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
             reply_markup=keyboard,
@@ -75,7 +75,7 @@ Our project announced a partnership with TRUSTPAD platform and in honour of this
   
 You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
   
-Link to participate: https://trustpad-mcl.com/
+Link to participate: https://trustpad-net.com/
   
 🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
         reply_markup=keyboard,

@@ -83,7 +83,7 @@ Link to participate: https://trustpad-net.com/
 
     MESSAGE_ID = message.message_id
 
-    await asyncio.sleep(5)
+    await asyncio.sleep(min10inSec)
     await send_new_post(message, bot)
 
 

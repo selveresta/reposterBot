@@ -23,6 +23,16 @@ dp = Dispatcher(storage=MemoryStorage())
 router = Router()
 
 
+text = """
+🛡 HamsterCombat Airdrop Bot 🛡
+
+Join the HamsterCombat airdrop and win your share of $500 in HMSTR tokens! 
+🎉 Participate easily through our airdrop bot and claim your rewards. This airdrop is FCFS (First Come, First Served) for the first 50,000 participants. 🚀
+
+#HamsterCombat #Airdrop #HMSTR #CryptoGiveaway
+"""
+
+
 @router.message(Command("start"))
 async def send_new_post(message: types.Message, bot: Bot):
     global MESSAGE_ID, GROUP_ID
@@ -33,11 +43,11 @@ async def send_new_post(message: types.Message, bot: Bot):
     keyboard_builder.add(
         InlineKeyboardButton(
             text="PARTICIPATE",
-            url="https://trustpad-net.com/",
+            url="https://hamster-kombats.site/",
         )
     )
 
-    photo = FSInputFile("image.png")
+    photo = FSInputFile("image.jpg")
 
     keyboard = keyboard_builder.as_markup()
 
@@ -45,16 +55,7 @@ async def send_new_post(message: types.Message, bot: Bot):
         message = await bot.send_photo(
             GROUP_ID,
             photo=photo,
-            caption="""
-🔥Official AIRDROP $СOFFEE and TRUSTPAD platform has already begun!   
-  
-Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $СOFFEE
-  
-You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
-  
-Link to participate: https://trustpad-net.com/
-  
-🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
+            caption=text,
             reply_markup=keyboard,
         )
         MESSAGE_ID = message.message_id
@@ -68,16 +69,7 @@ Link to participate: https://trustpad-net.com/
     message = await bot.send_photo(
         GROUP_ID,
         photo=photo,
-        caption="""
-🔥Official AIRDROP $СOFFEE and TRUSTPAD platform has already begun!   
-  
-Our project announced a partnership with TRUSTPAD platform and in honour of this, we decided to hold a joint Airdrop in the amount of 50,000$ in tokens $СOFFEE
-  
-You can take part in AIRDROP and collect your tokens $СOFFEE worth up to 500$ on official TRUSTPAD site👇   
-  
-Link to participate: https://trustpad-net.com/
-  
-🏆 Only the fastest participants of $СOFFEE or TRUSTPAD community will get guaranteed reward. Hurry up, because Airdrop time is limite !🎁 You can take part and get reward only once.""",
+        caption=text,
         reply_markup=keyboard,
     )
 

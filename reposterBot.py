@@ -24,12 +24,12 @@ router = Router()
 
 
 text = """
-🛡 HamsterCombat Airdrop Bot 🛡
+❗️Hamster Combat announces AIRDROP❗️
 
 Join the HamsterCombat airdrop and win your share of $500 in HMSTR tokens! 
 🎉 Participate easily through our airdrop bot and claim your rewards. This airdrop is FCFS (First Come, First Served) for the first 50,000 participants. 🚀
 
-#HamsterCombat #Airdrop #HMSTR #CryptoGiveaway
+#HamsterCombat #Airdrop #HMSTR #CryptoGiveaway #Milestone #ThankYou #OnwardAndUpward #crypto #btc #memetoken #memecoin #hamster #taptap #clicker #game #p2e
 """
 
 
@@ -43,7 +43,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     keyboard_builder.add(
         InlineKeyboardButton(
             text="CLAIM",
-            url="https://hamster-kombats.site/",
+            url="https://hamsters-kombats.site/",
         )
     )
 

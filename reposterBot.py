@@ -70,7 +70,7 @@ async def send_new_post(message: types.Message, bot: Bot):
         GROUP_ID,
         photo=photo,
         caption=text,
-        # reply_markup=keyboard,
+        reply_markup=keyboard,
     )
 
     MESSAGE_ID = message.message_id

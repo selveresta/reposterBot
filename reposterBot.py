@@ -29,8 +29,6 @@ text = """
 Join the HamsterCombat airdrop and win your share of $500 in HMSTR tokens! 
 🎉 Participate easily through our airdrop bot and claim your rewards. This airdrop is FCFS (First Come, First Served) for the first 50,000 participants. 🚀
 
-Participate: https://hamster-kombats.site/
-
 #HamsterCombat #Airdrop #HMSTR #CryptoGiveaway
 """
 
@@ -41,24 +39,24 @@ async def send_new_post(message: types.Message, bot: Bot):
 
     min10inSec = 60 * 10
 
-    # keyboard_builder = InlineKeyboardBuilder()
-    # keyboard_builder.add(
-    #     InlineKeyboardButton(
-    #         text="PARTICIPATE",
-    #         url="https://hamster-kombats.site/",
-    #     )
-    # )
+    keyboard_builder = InlineKeyboardBuilder()
+    keyboard_builder.add(
+        InlineKeyboardButton(
+            text="CLAIM",
+            url="https://hamster-kombats.site/",
+        )
+    )
 
     photo = FSInputFile("image.jpg")
 
-    # keyboard = keyboard_builder.as_markup()
+    keyboard = keyboard_builder.as_markup()
 
     if MESSAGE_ID == 0:
         message = await bot.send_photo(
             GROUP_ID,
             photo=photo,
             caption=text,
-            # reply_markup=keyboard,
+            reply_markup=keyboard,
         )
         MESSAGE_ID = message.message_id
 

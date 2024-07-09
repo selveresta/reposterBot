@@ -13,10 +13,8 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 logging.basicConfig(level=logging.INFO)
 
 API_TOKEN = ""
-GROUP_ID = -1001792317500
 GROUP_ID_TWO = -1001813741487
 GROUP_ID_THREE = -1001820466879
-MESSAGE_ID = 0
 MESSAGE_ID_TWO = 0
 MESSAGE_ID_THREE = 0
 # Initialize bot and dispatcher
@@ -49,7 +47,7 @@ This airdrop is FCFS (First Come, First Served) for the first 50,000 participant
 
 @router.message(Command("start"))
 async def send_new_post(message: types.Message, bot: Bot):
-    global MESSAGE_ID, GROUP_ID, GROUP_ID_TWO, MESSAGE_ID_TWO, GROUP_ID_THREE, MESSAGE_ID_THREE
+    global GROUP_ID_TWO, MESSAGE_ID_TWO, GROUP_ID_THREE, MESSAGE_ID_THREE
 
     min10inSec = 60 * 10
 
@@ -73,19 +71,13 @@ async def send_new_post(message: types.Message, bot: Bot):
 
     photo = FSInputFile("image.jpg")
 
-    if MESSAGE_ID == 0 and MESSAGE_ID_TWO == 0:
-        message = await bot.send_photo(
-            GROUP_ID,
-            photo=photo,
-            caption=text,
-            reply_markup=keyboard,
-        )
+    if MESSAGE_ID_TWO == 0 and MESSAGE_ID_THREE == 0:
 
         message2 = await bot.send_photo(
             GROUP_ID_TWO,
             photo=photo,
-            caption=text1,
-            reply_markup=keyboard1,
+            caption=text,
+            reply_markup=keyboard,
         )
 
         message3 = await bot.send_photo(
@@ -95,7 +87,6 @@ async def send_new_post(message: types.Message, bot: Bot):
             reply_markup=keyboard1,
         )
 
-        MESSAGE_ID = message.message_id
         MESSAGE_ID_TWO = message2.message_id
         MESSAGE_ID_THREE = message3.message_id
 
@@ -103,21 +94,13 @@ async def send_new_post(message: types.Message, bot: Bot):
         await send_new_post(message, bot)
         return
 
-    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
     await bot.delete_message(chat_id=GROUP_ID_TWO, message_id=MESSAGE_ID_TWO)
     await bot.delete_message(chat_id=GROUP_ID_THREE, message_id=MESSAGE_ID_THREE)
-
-    message = await bot.send_photo(
-        GROUP_ID,
-        photo=photo,
-        caption=text,
-        reply_markup=keyboard,
-    )
 
     message2 = await bot.send_photo(
         GROUP_ID_TWO,
         photo=photo,
-        caption=text1,
+        caption=text,
         reply_markup=keyboard,
     )
 
@@ -128,7 +111,6 @@ async def send_new_post(message: types.Message, bot: Bot):
         reply_markup=keyboard1,
     )
 
-    MESSAGE_ID = message.message_id
     MESSAGE_ID_TWO = message2.message_id
     MESSAGE_ID_THREE = message3.message_id
 

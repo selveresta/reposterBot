@@ -70,6 +70,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     keyboard1 = keyboard_builder1.as_markup()
 
     photo = FSInputFile("image.jpg")
+    photo1 = FSInputFile("image1.jpg")
 
     if MESSAGE_ID_TWO == 0 and MESSAGE_ID_THREE == 0:
 
@@ -82,7 +83,7 @@ async def send_new_post(message: types.Message, bot: Bot):
 
         message3 = await bot.send_photo(
             GROUP_ID_THREE,
-            photo=photo,
+            photo=photo1,
             caption=text1,
             reply_markup=keyboard1,
         )
@@ -106,7 +107,7 @@ async def send_new_post(message: types.Message, bot: Bot):
 
     message3 = await bot.send_photo(
         GROUP_ID_THREE,
-        photo=photo,
+        photo=photo1,
         caption=text1,
         reply_markup=keyboard1,
     )

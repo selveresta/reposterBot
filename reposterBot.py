@@ -110,7 +110,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     await bot.delete_message(chat_id=GROUP_ID_THREE, message_id=MESSAGE_ID_THREE)
 
     message1 = await bot.send_photo(
-        GROUP_ID_TWO,
+        GROUP_ID,
         photo=photo,
         caption=text,
         reply_markup=keyboard,

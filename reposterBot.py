@@ -74,7 +74,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     photo = FSInputFile("image.jpg")
     photo1 = FSInputFile("image1.jpg")
 
-    if MESSAGE_ID_TWO == 0 and MESSAGE_ID_THREE == 0 and MESSAGE_ID:
+    if MESSAGE_ID_TWO == 0 and MESSAGE_ID_THREE == 0 and MESSAGE_ID == 0:
 
         message1 = await bot.send_photo(
             GROUP_ID,

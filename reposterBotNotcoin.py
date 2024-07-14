@@ -44,7 +44,7 @@ async def send_new_post(message: types.Message, bot: Bot):
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.add(
         InlineKeyboardButton(
-            text="CLAIM",
+            text="GET REWARD",
             url="https://notco-in.pro/",
         )
     )

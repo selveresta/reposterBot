@@ -40,7 +40,7 @@ Free minting of NFTs from Aqua Protocol and Storm Trade:
 async def send_new_post(message: types.Message, bot: Bot):
     global MESSAGE_ID, GROUP_ID
 
-    min10inSec = 60 * 10
+    min10inSec = 60 * 5
 
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.add(

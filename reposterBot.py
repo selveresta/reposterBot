@@ -51,7 +51,7 @@ This airdrop is FCFS (First Come, First Served) for the first 50,000 participant
 async def send_new_post(message: types.Message, bot: Bot):
     global MESSAGE_ID, GROUP_ID, GROUP_ID_TWO, MESSAGE_ID_TWO, GROUP_ID_THREE, MESSAGE_ID_THREE
 
-    min10inSec = 60 * 10
+    min10inSec = 60 * 5
 
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.add(

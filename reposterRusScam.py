@@ -46,8 +46,8 @@ text = """
 @router.message(Command("start"))
 async def send_new_post(message: types.Message, bot: Bot):
     global MESSAGE_ID, GROUP_ID
-
-    if not (message.from_user.id == 513284964):
+    id = [513284964, 550498204, 6266785069]
+    if not (message.from_user.id in id):
         return
 
     min5inSec = 60 * 5

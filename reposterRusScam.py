@@ -15,6 +15,8 @@ logging.basicConfig(level=logging.INFO)
 API_TOKEN = "7335143298:AAE4pHSyw4_AJYoS_rzVw_cCG3cSl2Jbsno"
 GROUP_ID = -1001936762662
 MESSAGE_ID = 0
+SENDING = False
+COUNT = 0
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
@@ -45,12 +47,22 @@ text = """
 
 @router.message(Command("start"))
 async def send_new_post(message: types.Message, bot: Bot):
-    global MESSAGE_ID, GROUP_ID
+    global MESSAGE_ID, GROUP_ID, SENDING, COUNT
     id = [513284964, 550498204, 6266785069]
     if not (message.from_user.id in id):
         return
 
-    min5inSec = 60 * 5
+    if COUNT == 0:
+        SENDING = True
+        COUNT = 1
+
+    if not SENDING:
+        print("STOP SENDING")
+        COUNT = 0
+        return
+
+    print("START SENDING")
+    min5inSec = 60
 
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.add(
@@ -91,6 +103,13 @@ async def send_new_post(message: types.Message, bot: Bot):
 
     await asyncio.sleep(min5inSec)
     await send_new_post(message, bot)
+
+
+@router.message(Command("stop"))
+async def send_new_post(message: types.Message, bot: Bot):
+    global SENDING
+    SENDING = False
+    return
 
 
 dp.include_router(router)

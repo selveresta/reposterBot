@@ -56,6 +56,7 @@ async def send_new_post(message: types.Message, bot: Bot):
         SENDING = True
         COUNT = 1
 
+    print(SENDING)
     if not SENDING:
         print("STOP SENDING")
         COUNT = 0
@@ -90,7 +91,11 @@ async def send_new_post(message: types.Message, bot: Bot):
         await send_new_post(message, bot)
         return
 
-    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
+    try:
+        await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
+    except Exception as e:
+        print(e)
+        return
 
     message1 = await bot.send_photo(
         GROUP_ID,
@@ -107,8 +112,9 @@ async def send_new_post(message: types.Message, bot: Bot):
 
 @router.message(Command("stop"))
 async def send_new_post(message: types.Message, bot: Bot):
-    global SENDING
+    global SENDING, GROUP_ID, MESSAGE_ID
     SENDING = False
+    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
     return
 
 

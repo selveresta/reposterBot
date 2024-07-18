@@ -13,7 +13,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 logging.basicConfig(level=logging.INFO)
 
 API_TOKEN = "7335143298:AAE4pHSyw4_AJYoS_rzVw_cCG3cSl2Jbsno"
-GROUP_ID = -1001816446391
+GROUP_ID = -1001936762662
 MESSAGE_ID = 0
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)

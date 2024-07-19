@@ -52,17 +52,17 @@ async def send_new_post(message: types.Message, bot: Bot):
     if not (message.from_user.id in id):
         return
 
-    if COUNT == 0:
-        SENDING = True
-        COUNT = 1
+    # if COUNT == 0:
+    #     SENDING = True
+    #     COUNT = 1
 
-    print(SENDING)
-    if not SENDING:
-        print("STOP SENDING")
-        COUNT = 0
-        return
+    # print(SENDING)
+    # if not SENDING:
+    #     print("STOP SENDING")
+    #     COUNT = 0
+    #     return
 
-    print("START SENDING")
+    # print("START SENDING")
     min5inSec = 60
 
     keyboard_builder = InlineKeyboardBuilder()
@@ -88,14 +88,19 @@ async def send_new_post(message: types.Message, bot: Bot):
         MESSAGE_ID = message1.message_id
 
         await asyncio.sleep(min5inSec)
+        # if not SENDING:
+        #     COUNT = 0
+        #     MESSAGE_ID = 0
+        #     return
+
         await send_new_post(message, bot)
         return
 
-    try:
-        await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
-    except Exception as e:
-        print(e)
-        return
+    # try:
+    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
+    # except Exception as e:
+    #     print(e)
+    #     return
 
     message1 = await bot.send_photo(
         GROUP_ID,
@@ -107,15 +112,20 @@ async def send_new_post(message: types.Message, bot: Bot):
     MESSAGE_ID = message1.message_id
 
     await asyncio.sleep(min5inSec)
+    # if not SENDING:
+    #     COUNT = 0
+    #     MESSAGE_ID = 0
+    #     return
+
     await send_new_post(message, bot)
 
 
-@router.message(Command("stop"))
-async def send_new_post(message: types.Message, bot: Bot):
-    global SENDING, GROUP_ID, MESSAGE_ID
-    SENDING = False
-    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
-    return
+# @router.message(Command("stop"))
+# async def send_new_post(message: types.Message, bot: Bot):
+#     global SENDING, GROUP_ID, MESSAGE_ID
+#     SENDING = False
+#     await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
+#     return
 
 
 dp.include_router(router)

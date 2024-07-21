@@ -99,7 +99,7 @@ async def send_new_post(message: types.Message, bot: Bot):
 
 
 @router.message(Command("stop"))
-async def send_new_post(message: types.Message, bot: Bot):
+async def stop(message: types.Message, bot: Bot):
     global GROUPS, MESSAGES, SENDING, REPLACE
 
     REPLACE = True
@@ -110,6 +110,9 @@ dp.include_router(router)
 
 
 async def main():
+    loop = asyncio.get_event_loop()
+    task = loop.create_task(coro=send_new_post(message=None, bot=bot))
+    await task
     await dp.start_polling(bot)
 
 

@@ -1,122 +1,61 @@
 import logging
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, F
 from aiogram.types import BotCommand
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command
 import time
 import asyncio
 from aiogram import types, Router, Bot
-from aiogram.types import InlineKeyboardButton, FSInputFile
+from aiogram.types import InlineKeyboardButton, FSInputFile, Message
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.utils.chat_action import ChatActionSender
+
+from message import MessagePost
+
+from hamster.hamsterConfig import (
+    hamster_text,
+    hamster_url,
+    hamster_url_text,
+    hamster_photo,
+)
+
+from threading import Thread
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
 API_TOKEN = "7320376976:AAEpYY8s8ZViOEbYgfFjtmG6-jNXnFhqo1Y"
-# GROUPS = [-1001792317500, -1001813741487, -1001820466879, -1001988747716]
-GROUPS = [-1001988747716]
-MESSAGES = []
-ME = 513284964
-SENDING = False
-REPLACE = False
-# Initialize bot and dispatcher
+
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
 
 
 router = Router()
 
-
-text = """
-🔥Hamster Combat announces AIRDROP 🔥
-❗️It is time to go WEB3❗️
- 
-🤓 Some of you might have already seen that the first Airdrop Task has been added.
-
-🤩 If you already have a Metamask wallet, connect your wallet to our website.
- 
-✍️ If you don't have a Metamask wallet, check out the guidelines on YouTube and in local communities to create one.
-It will take you less than a minute!
- 
-👉 Connecting wallets is crucial, because.. how else will you receive an AirDrop?
-
-
-❗️❗️❗️ATTENTION ❗️ ❗️❗️
-We have noticed that many people are having difficulty claiming coins. Please note that your wallet must have at least $10 in equivalent to pay the network commission.
-"""
+post = MessagePost(
+    [-1001988747716], hamster_text, hamster_url, hamster_url_text, hamster_photo
+)
 
 
 @router.message(Command("start"))
-async def send_new_post(message: types.Message, bot: Bot):
-    global GROUPS, MESSAGES, SENDING, REPLACE
-
-    while True:
-
-        SENDING = True
-
-        if REPLACE:
-            SENDING = False
-
-        if SENDING == False:
-            for m in MESSAGES:
-                await bot.delete_message(m["g"], m["m"])
-            REPLACE = False
-            MESSAGES = []
-            return
-
-        try:
-            if len(MESSAGES) != 0:
-                for m in MESSAGES:
-                    await bot.delete_message(m["g"], m["m"])
-
-            MESSAGES = []
-            min10inSec = 120
-
-            keyboard_builder = InlineKeyboardBuilder()
-            keyboard_builder.add(
-                InlineKeyboardButton(
-                    text="GET AIRDROP",
-                    url="https://hamster-combats.site",
-                )
-            )
-            keyboard = keyboard_builder.as_markup()
-
-            photo = FSInputFile("image.jpg")
-
-            for g in GROUPS:
-                m = await bot.send_photo(
-                    g,
-                    photo=photo,
-                    caption=text,
-                    reply_markup=keyboard,
-                )
-                MESSAGES.append({"g": g, "m": m.message_id})
-
-            await asyncio.sleep(min10inSec)
-
-        except Exception as e:
-            print("Error - ", e)
+async def start(message: Message, state: FSMContext):
+    await post.create_and_start_task(bot)
 
 
 @router.message(Command("stop"))
-async def stop(message: types.Message, bot: Bot):
-    global GROUPS, MESSAGES, SENDING, REPLACE
-
-    REPLACE = True
-    await message.answer("Sending stop")
+async def start(message: Message, state: FSMContext):
+    await post.stop_sending(bot)
 
 
 dp.include_router(router)
 
 
 async def main():
-    loop = asyncio.get_event_loop()
-    task = loop.create_task(coro=send_new_post(message=None, bot=bot))
-    await task
     await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
-    import asyncio
-
     asyncio.run(main())
